@@ -2,7 +2,7 @@ import { mount, RouterLinkStub } from "@vue/test-utils"
 import Header from "@/components/Header.vue"
 
 describe("Header.vue", () => {
-  test("link test", () => {
+  it("link test", () => {
     const wrapper = mount(Header, {
       stubs: {
         NuxtLink: RouterLinkStub
