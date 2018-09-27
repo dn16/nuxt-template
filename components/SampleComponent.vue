@@ -5,14 +5,13 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    sampleProps: {
-      type: String,
-      required: true
-    }
-  }
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator"
+
+@Component({})
+export default class SampleComponent extends Vue {
+  @Prop({ type: String, required: true })
+  sampleProps: string
 }
 </script>
 

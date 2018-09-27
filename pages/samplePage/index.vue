@@ -6,36 +6,17 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator"
 import SampleComponent from "~/components/SampleComponent.vue"
 
-export default {
+@Component({
   components: {
     SampleComponent
-  },
-  data() {
-    return {
-      sampleProps: "sampleProps"
-    }
-  },
-  head() {
-    return {
-      title: "samplePage",
-      meta: [
-        {
-          name: "description",
-          content: ""
-        },
-        {
-          name: "keywords",
-          content: ""
-        }
-      ],
-      bodyAttrs: {
-        class: ""
-      }
-    }
   }
+})
+export default class extends Vue {
+  sampleProps: string = "sampleProps"
 }
 </script>
 

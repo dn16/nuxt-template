@@ -54,6 +54,7 @@ module.exports = {
     ]
   },
   modules: [
+    "~/modules/typescript.js",
     [
       "nuxt-sass-resources-loader",
       ["@/assets/sass/_mixin.scss", "@/assets/sass/style.scss"]
