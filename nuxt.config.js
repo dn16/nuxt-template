@@ -1,5 +1,6 @@
 const webpack = require("webpack")
 module.exports = {
+  mode: "universal",
   /*
   ** Headers of the page
   */
@@ -33,18 +34,36 @@ module.exports = {
     /*
     ** Run ESLint on save
     */
-    extend(config, { isDev, isClient }) {
-      if (isDev && isClient) {
+    extend(config, ctx) {
+      if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
           enforce: "pre",
           test: /\.(js|vue)$/,
           loader: "eslint-loader",
           exclude: /(node_modules)/
         })
+        // const vueLoader = config.module.rules.find(
+        //   rule => rule.loader === "vue-loader"
+        // )
+        // vueLoader.options.transformToRequire["img"] = ["src", "data-src"]
+      }
+      if (!ctx.isDev) {
         const vueLoader = config.module.rules.find(
           rule => rule.loader === "vue-loader"
         )
-        vueLoader.options.transformToRequire["img"] = ["src", "data-src"]
+        vueLoader.options.compilerModules = [
+          {
+            preTransformNode(astEl) {
+              const { attrsMap, attrsList } = astEl
+              if (attrsMap["data-test"]) {
+                delete attrsMap["data-test"]
+                const index = attrsList.findIndex(x => x.name == "data-test")
+                attrsList.splice(index, 1)
+              }
+              return astEl
+            }
+          }
+        ]
       }
     },
     plugins: [

@@ -16,3 +16,5 @@ dist
 .DS_Store
 _DS_Store
 Thumbs.db
+
+.cache-loader
